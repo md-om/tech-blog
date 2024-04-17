@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'Constants/themecolors.dart';
+import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:tech_blog/gen/fonts.gen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
         Locale('fa'), // Farsi
       ],
       theme: ThemeData(
-        fontFamily: 'dana',
+        fontFamily: FontFamily.dana,
         textTheme: const TextTheme(
           titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
@@ -29,7 +33,25 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Text('Salam'),
+      home: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(image: Assets.images.public.logo.provider(), height: 64),
+            const SizedBox(
+              height: 32,
+            ),
+            const Text('لطفاً چند لحظه صبر کنید...'),
+            const SizedBox(
+              height: 32,
+            ),
+            const SpinKitRing(
+              color: SolidColors.primaryColor,
+              size: 50.0,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
