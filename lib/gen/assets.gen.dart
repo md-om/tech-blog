@@ -18,12 +18,16 @@ class $AssetsImagesGen {
 class $AssetsImagesPublicGen {
   const $AssetsImagesPublicGen();
 
+  /// File path: assets/images/public/cover.png
+  AssetGenImage get cover =>
+      const AssetGenImage('assets/images/public/cover.png');
+
   /// File path: assets/images/public/logo.png
   AssetGenImage get logo =>
       const AssetGenImage('assets/images/public/logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  List<AssetGenImage> get values => [cover, logo];
 }
 
 class Assets {

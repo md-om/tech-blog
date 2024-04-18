@@ -1,9 +1,7 @@
+import 'package:tech_blog/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'Constants/themecolors.dart';
-import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/gen/fonts.gen.dart';
+import 'package:tech_blog/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,25 +31,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(image: Assets.images.public.logo.provider(), height: 64),
-            const SizedBox(
-              height: 32,
-            ),
-            const Text('لطفاً چند لحظه صبر کنید...'),
-            const SizedBox(
-              height: 32,
-            ),
-            const SpinKitRing(
-              color: SolidColors.primaryColor,
-              size: 50.0,
-            ),
-          ],
-        ),
-      ),
+      home: const SplashScreen(),
     );
   }
 }
