@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: FontFamily.dana,
         textTheme: const TextTheme(
-          titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
           bodyMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           displayLarge: TextStyle(
@@ -37,6 +36,10 @@ class MyApp extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: SolidColors.coverSubTitle),
+          titleLarge: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: SolidColors.titleColor),
         ),
       ),
       debugShowCheckedModeBanner: false,

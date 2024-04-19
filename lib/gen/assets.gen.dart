@@ -22,8 +22,11 @@ class $AssetsImagesIconsGen {
   /// File path: assets/images/icons/hash.png
   AssetGenImage get hash => const AssetGenImage('assets/images/icons/hash.png');
 
+  /// File path: assets/images/icons/pen.png
+  AssetGenImage get pen => const AssetGenImage('assets/images/icons/pen.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [hash];
+  List<AssetGenImage> get values => [hash, pen];
 }
 
 class $AssetsImagesPublicGen {
