@@ -12,7 +12,18 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
   $AssetsImagesPublicGen get public => const $AssetsImagesPublicGen();
+}
+
+class $AssetsImagesIconsGen {
+  const $AssetsImagesIconsGen();
+
+  /// File path: assets/images/icons/hash.png
+  AssetGenImage get hash => const AssetGenImage('assets/images/icons/hash.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [hash];
 }
 
 class $AssetsImagesPublicGen {
