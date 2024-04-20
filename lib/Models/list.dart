@@ -24,3 +24,18 @@ class HotestArticle {
       required this.views,
       required this.content});
 }
+
+class ListPodcast {
+  String title;
+  String author;
+  String imgUrl;
+  String epTitle;
+  String time;
+
+  ListPodcast(
+      {required this.title,
+      required this.author,
+      required this.imgUrl,
+      required this.epTitle,
+      required this.time});
+}

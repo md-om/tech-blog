@@ -123,3 +123,36 @@ List<HotestArticle> hotestArticle = [
       content:
           """دورف در مصاحبه‌ی یک‌ساعته و جذابش با تاکر کارلسون که تا این لحظه نزدیک‌به ۲ میلیون بار در یوتیوب دیده شده، داستان شروع تلگرام را شرح می‌دهد و حرف‌های جالبی درباره‌ی حریم شخصی، وضعیت آزادی بیان در شبکه‌های اجتماعی و شیوه‌ی اداره‌ی تلگرام می‌گوید؛ مثلا اینکه حتی یک دلار برای تبلیغ تلگرام خرج نکرده، معتقد است پیام‌رسان‌های دیگر پنج، شش سال از قابلیت‌های تلگرام عقب هستند و بیشترین فشار برای سانسور محتوا را نه از سمت دولت‌ها، بلکه از سمت اپل و گوگل تحمل می‌کند."""),
 ];
+
+List<ListPodcast> listPodcast = [
+  ListPodcast(
+      title: 'ارز دیجیتال',
+      author: 'مهرداد حسینی',
+      imgUrl: Assets.images.podcast.crypto.path,
+      epTitle: 'کریپتو چیست',
+      time: '22:00'),
+  ListPodcast(
+      title: 'پرسان',
+      author: 'محمد احمدی',
+      imgUrl: Assets.images.podcast.porsan.path,
+      epTitle: 'پرسان',
+      time: '10:32'),
+  ListPodcast(
+      title: 'رفتار',
+      author: 'مینا اسدی',
+      imgUrl: Assets.images.podcast.raftar.path,
+      epTitle: 'مدیریت رفتار',
+      time: '08:00'),
+  ListPodcast(
+      title: 'روبوتیک',
+      author: 'مهرداد حسینی',
+      imgUrl: Assets.images.podcast.robo.path,
+      epTitle: 'روبوتیک',
+      time: '11:00'),
+  ListPodcast(
+      title: 'رادیو فناوری',
+      author: 'حسن رضائی',
+      imgUrl: Assets.images.podcast.siket.path,
+      epTitle: 'کوانتوم چیست',
+      time: '22:00'),
+];

@@ -13,6 +13,7 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
+  $AssetsImagesPodcastGen get podcast => const $AssetsImagesPodcastGen();
   $AssetsImagesPublicGen get public => const $AssetsImagesPublicGen();
 }
 
@@ -22,11 +23,51 @@ class $AssetsImagesIconsGen {
   /// File path: assets/images/icons/hash.png
   AssetGenImage get hash => const AssetGenImage('assets/images/icons/hash.png');
 
+  /// File path: assets/images/icons/home.png
+  AssetGenImage get home => const AssetGenImage('assets/images/icons/home.png');
+
+  /// File path: assets/images/icons/mic.png
+  AssetGenImage get mic => const AssetGenImage('assets/images/icons/mic.png');
+
   /// File path: assets/images/icons/pen.png
   AssetGenImage get pen => const AssetGenImage('assets/images/icons/pen.png');
 
+  /// File path: assets/images/icons/user.png
+  AssetGenImage get user => const AssetGenImage('assets/images/icons/user.png');
+
+  /// File path: assets/images/icons/write.png
+  AssetGenImage get write =>
+      const AssetGenImage('assets/images/icons/write.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [hash, pen];
+  List<AssetGenImage> get values => [hash, home, mic, pen, user, write];
+}
+
+class $AssetsImagesPodcastGen {
+  const $AssetsImagesPodcastGen();
+
+  /// File path: assets/images/podcast/crypto.jpg
+  AssetGenImage get crypto =>
+      const AssetGenImage('assets/images/podcast/crypto.jpg');
+
+  /// File path: assets/images/podcast/porsan.jpg
+  AssetGenImage get porsan =>
+      const AssetGenImage('assets/images/podcast/porsan.jpg');
+
+  /// File path: assets/images/podcast/raftar.jpg
+  AssetGenImage get raftar =>
+      const AssetGenImage('assets/images/podcast/raftar.jpg');
+
+  /// File path: assets/images/podcast/robo.jpg
+  AssetGenImage get robo =>
+      const AssetGenImage('assets/images/podcast/robo.jpg');
+
+  /// File path: assets/images/podcast/siket.jpg
+  AssetGenImage get siket =>
+      const AssetGenImage('assets/images/podcast/siket.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [crypto, porsan, raftar, robo, siket];
 }
 
 class $AssetsImagesPublicGen {
