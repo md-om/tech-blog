@@ -77,12 +77,16 @@ class $AssetsImagesPublicGen {
   AssetGenImage get cover =>
       const AssetGenImage('assets/images/public/cover.png');
 
+  /// File path: assets/images/public/defaultAvatar.png
+  AssetGenImage get defaultAvatar =>
+      const AssetGenImage('assets/images/public/defaultAvatar.png');
+
   /// File path: assets/images/public/logo.png
   AssetGenImage get logo =>
       const AssetGenImage('assets/images/public/logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [cover, logo];
+  List<AssetGenImage> get values => [cover, defaultAvatar, logo];
 }
 
 class Assets {

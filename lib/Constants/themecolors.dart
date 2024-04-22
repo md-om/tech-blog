@@ -11,6 +11,7 @@ class SolidColors {
   static const Color subText = Color.fromARGB(255, 197, 197, 197);
   static const Color coverTitle = Color.fromARGB(255, 255, 255, 255);
   static const Color coverSubTitle = Color.fromARGB(222, 255, 255, 255);
+  static const Color dividerColor = Color.fromARGB(255, 112, 112, 112);
 }
 
 class GradientColor {

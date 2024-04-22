@@ -2,7 +2,7 @@ import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_blog/splash_screen.dart';
+import 'package:tech_blog/views/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +27,14 @@ class MyApp extends StatelessWidget {
         fontFamily: FontFamily.dana,
         textTheme: const TextTheme(
           titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-          bodyMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+          bodyMedium: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: SolidColors.primaryColor),
+          bodySmall: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: SolidColors.blackColor),
           displayLarge: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,

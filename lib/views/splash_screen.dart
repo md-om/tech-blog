@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:tech_blog/home.dart';
-import 'Constants/themecolors.dart';
+import 'package:tech_blog/views/home.dart';
+import '../Constants/themecolors.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,9 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const Home(),
-      ));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ));
     });
   }
 
