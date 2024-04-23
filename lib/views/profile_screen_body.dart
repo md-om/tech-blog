@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_blog/Constants/strings.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
-import 'package:tech_blog/Models/fake_data.dart';
 import 'package:tech_blog/components/app_component.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 

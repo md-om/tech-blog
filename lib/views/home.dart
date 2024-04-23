@@ -4,14 +4,26 @@ import 'package:tech_blog/views/home_screen_body.dart';
 import 'package:tech_blog/views/profile_screen_body.dart';
 import '../gen/assets.gen.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var selectedPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
     double centerMargin = size.width / 16;
+    List<Widget> selectedPageScreen = [
+      HomeScreenBody(
+          size: size, textTheme: textTheme, centerMargin: centerMargin),
+      ProfileScreenBody(
+          size: size, textTheme: textTheme, centerMargin: centerMargin)
+    ];
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -36,14 +48,19 @@ class Home extends StatelessWidget {
             // Positined.fill will fill all remain free space
             Center(
               child: Positioned.fill(
-                child: ProfileScreenBody(
-                    size: size,
-                    textTheme: textTheme,
-                    centerMargin: centerMargin),
+                child: selectedPageScreen[selectedPageIndex],
               ),
             ),
 
-            BottomNavigationBar(size: size, centerMargin: centerMargin),
+            BottomNavigationBar(
+              size: size,
+              centerMargin: centerMargin,
+              changeScreen: (value) {
+                setState(() {
+                  selectedPageIndex = value;
+                });
+              },
+            ),
           ],
         ),
       ),
@@ -56,10 +73,12 @@ class BottomNavigationBar extends StatelessWidget {
     super.key,
     required this.size,
     required this.centerMargin,
+    required this.changeScreen,
   });
 
   final Size size;
   final double centerMargin;
+  final Function(int) changeScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +109,7 @@ class BottomNavigationBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => changeScreen(0),
                   icon: ImageIcon(
                     Assets.images.icons.home.provider(),
                     color: SolidColors.whiteColor,
@@ -102,7 +121,7 @@ class BottomNavigationBar extends StatelessWidget {
                       color: SolidColors.whiteColor),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => changeScreen(1),
                   icon: ImageIcon(Assets.images.icons.user.provider(),
                       color: SolidColors.whiteColor),
                 ),
