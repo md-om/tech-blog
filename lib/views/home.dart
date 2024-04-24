@@ -46,10 +46,8 @@ class _HomeState extends State<Home> {
         body: Stack(
           children: [
             // Positined.fill will fill all remain free space
-            Center(
-              child: Positioned.fill(
-                child: selectedPageScreen[selectedPageIndex],
-              ),
+            Positioned.fill(
+              child: selectedPageScreen[selectedPageIndex],
             ),
 
             BottomNavigationBar(

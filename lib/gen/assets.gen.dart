@@ -85,8 +85,11 @@ class $AssetsImagesPublicGen {
   AssetGenImage get logo =>
       const AssetGenImage('assets/images/public/logo.png');
 
+  /// File path: assets/images/public/techbot.svg
+  String get techbot => 'assets/images/public/techbot.svg';
+
   /// List of all assets
-  List<AssetGenImage> get values => [cover, defaultAvatar, logo];
+  List<dynamic> get values => [cover, defaultAvatar, logo, techbot];
 }
 
 class Assets {
