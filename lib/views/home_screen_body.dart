@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_blog/Constants/strings.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/Models/fake_data.dart';
+import 'package:tech_blog/components/app_component.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
 class HomeScreenBody extends StatelessWidget {
@@ -290,40 +291,8 @@ class CategoryTags extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: tagCategory.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding:
-                EdgeInsets.fromLTRB(0, 8, index == 0 ? centerMargin : 16, 8),
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(16),
-                ),
-                gradient: LinearGradient(
-                    colors: GradientColor.tags,
-                    begin: Alignment.centerRight,
-                    end: Alignment.centerLeft),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    ImageIcon(
-                      Assets.images.icons.hash.provider(),
-                      color: SolidColors.whiteColor,
-                      size: 16,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      tagCategory[index].title,
-                      style: textTheme.displayMedium,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
+          return CatsTags(
+              centerMargin: centerMargin, textTheme: textTheme, index: index);
         },
       ),
     );

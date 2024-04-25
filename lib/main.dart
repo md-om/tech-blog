@@ -82,8 +82,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const RegisterIntro(),
-      // home: const UserCats(),
+      home: const SplashScreen(),
       // home: const RegisterIntro(),
     );
   }

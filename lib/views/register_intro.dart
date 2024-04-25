@@ -18,7 +18,7 @@ class RegisterIntro extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                Assets.images.public.techbot,
+                Assets.images.public.techbot.path,
                 height: 100,
               ),
               Padding(
