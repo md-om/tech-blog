@@ -19,7 +19,7 @@ List<ListTags> tagCategory = [
   ListTags(title: "پادکست"),
 ];
 
-late List<ListTags> favCategory = [];
+List<ListTags> favCategory = [];
 
 List<HotestArticle> hotestArticle = [
   HotestArticle(

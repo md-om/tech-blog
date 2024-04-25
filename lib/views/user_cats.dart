@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tech_blog/Constants/strings.dart';
@@ -80,8 +81,9 @@ class _UserCatsState extends State<UserCats> {
                         return InkWell(
                           onTap: () {
                             setState(() {
-                              favCategory.add(
-                                  ListTags(title: tagCategory[index].title));
+                              !favCategory.contains(tagCategory[index])
+                                  ? favCategory.add(tagCategory[index])
+                                  : print('Exist');
                             });
                           },
                           child: CatsTags(
@@ -120,24 +122,38 @@ class _UserCatsState extends State<UserCats> {
                               mainAxisSpacing: 10,
                               childAspectRatio: .3),
                       itemBuilder: (context, index) {
-                        return favCategory.isNotEmpty
-                            ? Container(
-                                decoration: const BoxDecoration(
-                                  color: SolidColors.favTagsBg,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(16),
-                                  ),
+                        return Container(
+                          decoration: const BoxDecoration(
+                            color: SolidColors.favTagsBg,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  favCategory[index].title,
+                                  style: textTheme.titleMedium,
+                                  textAlign: TextAlign.right,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    favCategory[index].title,
-                                    style: textTheme.titleMedium,
-                                    textAlign: TextAlign.center,
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      favCategory.removeAt(index);
+                                    });
+                                  },
+                                  child: const Icon(
+                                    CupertinoIcons.delete,
+                                    color: Colors.grey,
                                   ),
-                                ),
-                              )
-                            : null;
+                                )
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),

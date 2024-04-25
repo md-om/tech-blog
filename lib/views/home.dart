@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/views/home_screen_body.dart';
 import 'package:tech_blog/views/profile_screen_body.dart';
+import 'package:tech_blog/views/register_intro.dart';
 import '../gen/assets.gen.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +12,9 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
+
+// For access to all scaffold items
+final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _HomeState extends State<Home> {
   var selectedPageIndex = 0;
@@ -21,11 +26,65 @@ class _HomeState extends State<Home> {
     List<Widget> selectedPageScreen = [
       HomeScreenBody(
           size: size, textTheme: textTheme, centerMargin: centerMargin),
+      const RegisterIntro(),
       ProfileScreenBody(
           size: size, textTheme: textTheme, centerMargin: centerMargin)
     ];
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: SolidColors.whiteColor,
+          child: Padding(
+            padding: EdgeInsets.only(left: centerMargin, right: centerMargin),
+            child: ListView(
+              children: [
+                SizedBox(
+                  child: Center(
+                    child: Image.asset(
+                      Assets.images.public.logo.path,
+                      scale: 2,
+                    ),
+                  ),
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  onTap: () {
+                    _key.currentState!.openDrawer();
+                  },
+                  title: const Text('پروفایل کاربری'),
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  onTap: () {},
+                  title: const Text('درباره تک بلاگ'),
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  onTap: () {
+                    _key.currentState!.openDrawer();
+                  },
+                  title: const Text('اشتراک گذاری تک بلاگ'),
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  onTap: () {
+                    _key.currentState!.openDrawer();
+                  },
+                  title: const Text('تماس با ما'),
+                ),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: SolidColors.whiteColor,
@@ -34,12 +93,16 @@ class _HomeState extends State<Home> {
           flexibleSpace: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Icon(Icons.menu),
+              InkWell(
+                  onTap: () {
+                    _key.currentState!.openDrawer();
+                  },
+                  child: const Icon(Icons.menu)),
               Image(
                 image: Assets.images.public.logo.provider(),
                 height: size.height / 13.64,
               ),
-              const Icon(Icons.search)
+              const Icon(Icons.search),
             ],
           ),
         ),
@@ -114,12 +177,12 @@ class BottomNavigationBar extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => changeScreen(1),
                   icon: ImageIcon(Assets.images.icons.write.provider(),
                       color: SolidColors.whiteColor),
                 ),
                 IconButton(
-                  onPressed: () => changeScreen(1),
+                  onPressed: () => changeScreen(2),
                   icon: ImageIcon(Assets.images.icons.user.provider(),
                       color: SolidColors.whiteColor),
                 ),

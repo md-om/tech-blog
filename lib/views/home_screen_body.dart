@@ -68,7 +68,7 @@ class HotestPodcastItems extends StatelessWidget {
       height: size.height / 3.5,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: hotestArticle.length,
+        itemCount: listPodcast.length,
         itemBuilder: (context, index) {
           return Padding(
             padding:
