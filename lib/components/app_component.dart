@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/Models/fake_data.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Divder extends StatelessWidget {
   const Divder({
@@ -23,8 +24,9 @@ class Divder extends StatelessWidget {
 }
 
 // Tags component
+
 class CatsTags extends StatelessWidget {
-  CatsTags({
+  const CatsTags({
     super.key,
     required this.centerMargin,
     required this.textTheme,
@@ -34,7 +36,7 @@ class CatsTags extends StatelessWidget {
   final double centerMargin;
   final TextTheme textTheme;
 
-  var index;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,5 +72,13 @@ class CatsTags extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// URL Launcher
+showUrlOnWeb(String url) async {
+  var uri = Uri.parse(url);
+  if (!await launchUrl(uri)) {
+    throw Exception("Could not launch $uri");
   }
 }

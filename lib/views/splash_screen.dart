@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_blog/views/home.dart';
-import 'package:tech_blog/views/user_cats.dart';
 import '../Constants/themecolors.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
@@ -21,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const Home(),
+            builder: (context) => Home(),
           ));
     });
   }

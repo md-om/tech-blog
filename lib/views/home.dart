@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:tech_blog/Constants/strings.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
+import 'package:tech_blog/components/app_component.dart';
 import 'package:tech_blog/views/home_screen_body.dart';
 import 'package:tech_blog/views/profile_screen_body.dart';
 import 'package:tech_blog/views/register_intro.dart';
 import '../gen/assets.gen.dart';
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
+import 'package:get/get.dart';
 
 // For access to all scaffold items
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _HomeState extends State<Home> {
-  var selectedPageIndex = 0;
+class Home extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+  Home({super.key});
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -32,99 +29,98 @@ class _HomeState extends State<Home> {
     ];
     return SafeArea(
       child: Scaffold(
-        key: _key,
-        drawer: Drawer(
-          backgroundColor: SolidColors.whiteColor,
-          child: Padding(
-            padding: EdgeInsets.only(left: centerMargin, right: centerMargin),
-            child: ListView(
-              children: [
-                SizedBox(
-                  child: Center(
-                    child: Image.asset(
-                      Assets.images.public.logo.path,
-                      scale: 2,
+          key: _key,
+          drawer: Drawer(
+            backgroundColor: SolidColors.whiteColor,
+            child: Padding(
+              padding: EdgeInsets.only(left: centerMargin, right: centerMargin),
+              child: ListView(
+                children: [
+                  SizedBox(
+                    child: Center(
+                      child: Image.asset(
+                        Assets.images.public.logo.path,
+                        scale: 2,
+                      ),
                     ),
                   ),
+                  const Divider(
+                    color: SolidColors.dividerColor,
+                  ),
+                  ListTile(
+                    onTap: () {
+                      _key.currentState!.openDrawer();
+                    },
+                    title: const Text('پروفایل کاربری'),
+                  ),
+                  const Divider(
+                    color: SolidColors.dividerColor,
+                  ),
+                  ListTile(
+                    onTap: () {
+                      showUrlOnWeb(TextStrings.linkInGithub);
+                    },
+                    title: const Text('درباره تک بلاگ'),
+                  ),
+                  const Divider(
+                    color: SolidColors.dividerColor,
+                  ),
+                  ListTile(
+                    onTap: () async {
+                      await Share.share(TextStrings.shareText);
+                    },
+                    title: const Text('اشتراک گذاری تک بلاگ'),
+                  ),
+                  const Divider(
+                    color: SolidColors.dividerColor,
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    title: const Text('تماس با ما'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: SolidColors.whiteColor,
+            automaticallyImplyLeading: false,
+            surfaceTintColor: SolidColors.whiteColor,
+            flexibleSpace: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                    onTap: () {
+                      _key.currentState!.openDrawer();
+                    },
+                    child: const Icon(Icons.menu)),
+                Image(
+                  image: Assets.images.public.logo.provider(),
+                  height: size.height / 13.64,
                 ),
-                const Divider(
-                  color: SolidColors.dividerColor,
-                ),
-                ListTile(
-                  onTap: () {
-                    _key.currentState!.openDrawer();
-                  },
-                  title: const Text('پروفایل کاربری'),
-                ),
-                const Divider(
-                  color: SolidColors.dividerColor,
-                ),
-                ListTile(
-                  onTap: () {},
-                  title: const Text('درباره تک بلاگ'),
-                ),
-                const Divider(
-                  color: SolidColors.dividerColor,
-                ),
-                ListTile(
-                  onTap: () {
-                    _key.currentState!.openDrawer();
-                  },
-                  title: const Text('اشتراک گذاری تک بلاگ'),
-                ),
-                const Divider(
-                  color: SolidColors.dividerColor,
-                ),
-                ListTile(
-                  onTap: () {
-                    _key.currentState!.openDrawer();
-                  },
-                  title: const Text('تماس با ما'),
-                ),
+                const Icon(Icons.search),
               ],
             ),
           ),
-        ),
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: SolidColors.whiteColor,
-          automaticallyImplyLeading: false,
-          surfaceTintColor: SolidColors.whiteColor,
-          flexibleSpace: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                  onTap: () {
-                    _key.currentState!.openDrawer();
-                  },
-                  child: const Icon(Icons.menu)),
-              Image(
-                image: Assets.images.public.logo.provider(),
-                height: size.height / 13.64,
-              ),
-              const Icon(Icons.search),
-            ],
-          ),
-        ),
-        body: Stack(
-          children: [
-            // Positined.fill will fill all remain free space
-            Positioned.fill(
-              child: selectedPageScreen[selectedPageIndex],
-            ),
+          body: Obx(
+            () => Stack(
+              children: [
+                // Positined.fill will fill all remain free space
+                Positioned.fill(
+                  child: selectedPageScreen[selectedPageIndex.value],
+                ),
 
-            BottomNavigationBar(
-              size: size,
-              centerMargin: centerMargin,
-              changeScreen: (value) {
-                setState(() {
-                  selectedPageIndex = value;
-                });
-              },
+                BottomNavigationBar(
+                  size: size,
+                  centerMargin: centerMargin,
+                  changeScreen: (value) {
+                    selectedPageIndex.value = value;
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 }

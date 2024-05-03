@@ -1,5 +1,6 @@
 class TextStrings {
   static const String mostHotNews = "داغترین مطالب";
+  static const String linkInGithub = "https://github.com/md-om/tech-blog";
   static const String mostNew = "جدیدترین مطالب";
   static const String mostNewPodcast = "جدیدترین پادکست ها";
   static const String relatedPost = "مطالب مرتبط";
@@ -17,4 +18,8 @@ class TextStrings {
   static const String successRegisterMsg = """
 تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن""";
+  static const String shareText = """
+  سلام من تک بلاگ رو نصب کردم عالیه، توام بیا ازش استفاده کن\n
+  www.instagram.com/mehrdad.web3
+""";
 }

@@ -2,10 +2,7 @@ import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_blog/views/home.dart';
-import 'package:tech_blog/views/register_intro.dart';
 import 'package:tech_blog/views/splash_screen.dart';
-import 'package:tech_blog/views/user_cats.dart';
 
 void main() {
   runApp(const MyApp());

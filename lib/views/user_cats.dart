@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tech_blog/Constants/strings.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/Models/fake_data.dart';
-import 'package:tech_blog/Models/list.dart';
 import 'package:tech_blog/components/app_component.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
@@ -83,7 +82,8 @@ class _UserCatsState extends State<UserCats> {
                             setState(() {
                               !favCategory.contains(tagCategory[index])
                                   ? favCategory.add(tagCategory[index])
-                                  : print('Exist');
+                                  : () =>
+                                      {}; // No action needed when the condition is false;
                             });
                           },
                           child: CatsTags(
