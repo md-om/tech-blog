@@ -1,3 +1,5 @@
+import 'package:tech_blog/Constants/api_constant.dart';
+
 class ArticlesModel {
   String? id;
   String? title;
@@ -24,7 +26,7 @@ class ArticlesModel {
   ArticlesModel.fromJson(Map<String, dynamic> element) {
     id = element['id'];
     title = element['title'];
-    image = element['image'];
+    image = ApiConstant.hostDlUrl + element['image'];
     catId = element['cat_id'];
     catName = element['cat_name'];
     author = element['author'];

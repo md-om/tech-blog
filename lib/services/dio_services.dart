@@ -11,6 +11,6 @@ class DioServices {
               responseType: ResponseType.json,
               method: 'GET',
             ))
-        .then((response) => response));
+        .then((response) => response)); //response is return the content
   }
 }
