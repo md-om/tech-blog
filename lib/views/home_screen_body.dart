@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/Constants/strings.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
@@ -40,8 +42,7 @@ class HomeScreenBody extends StatelessWidget {
             topArticle(),
             HotestPodcastTitle(
                 centerMargin: centerMargin, textTheme: textTheme),
-            HotestPodcastItems(
-                size: size, centerMargin: centerMargin, textTheme: textTheme),
+            topPodcasts(),
             const SizedBox(
               height: 24,
             ),
@@ -68,53 +69,56 @@ class HomeScreenBody extends StatelessWidget {
                   SizedBox(
                     height: size.height / 5.4,
                     width: size.width / 2.5,
-                    child: Stack(children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
-                          image: DecorationImage(
-                              image: NetworkImage(hsctv[index].image!),
-                              fit: BoxFit.cover),
+                    child: CachedNetworkImage(
+                      imageUrl: hsctv[index].image!,
+                      imageBuilder: (context, imageProvider) =>
+                          Stack(children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                          foregroundDecoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                            gradient: LinearGradient(
+                                colors: GradientColor.blogOverlay,
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.center),
+                          ),
                         ),
-                        foregroundDecoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          gradient: LinearGradient(
-                              colors: GradientColor.blogOverlay,
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.center),
-                        ),
-                      ),
-                      Positioned(
-                          bottom: 10,
-                          right: 0,
-                          left: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                hsctv[index].author!,
-                                style: textTheme.displayMedium,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    hsctv[index].view!,
-                                    style: textTheme.displayMedium,
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  const Icon(
-                                    Icons.remove_red_eye_sharp,
-                                    size: 16,
-                                    color: SolidColors.whiteColor,
-                                  )
-                                ],
-                              ),
-                            ],
-                          ))
-                    ]),
+                        Positioned(
+                            bottom: 10,
+                            right: 0,
+                            left: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  hsctv[index].author!,
+                                  style: textTheme.displayMedium,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      hsctv[index].view!,
+                                      style: textTheme.displayMedium,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    const Icon(
+                                      Icons.remove_red_eye_sharp,
+                                      size: 16,
+                                      color: SolidColors.whiteColor,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ))
+                      ]),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 6),
@@ -136,63 +140,58 @@ class HomeScreenBody extends StatelessWidget {
       ),
     );
   }
-}
 
-class HotestPodcastItems extends StatelessWidget {
-  const HotestPodcastItems({
-    super.key,
-    required this.size,
-    required this.centerMargin,
-    required this.textTheme,
-  });
-
-  final Size size;
-  final double centerMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget topPodcasts() {
+    var hsctp = homeScreenController.topPodcast;
     return SizedBox(
       height: size.height / 3.5,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: listPodcast.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding:
-                EdgeInsets.fromLTRB(16, 10, index == 0 ? centerMargin : 16, 5),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: size.height / 5.4,
-                  width: size.width / 2.5,
-                  child: Stack(children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(16)),
-                        image: DecorationImage(
-                            image: AssetImage(listPodcast[index].imgUrl),
-                            fit: BoxFit.cover),
+      child: Obx(
+        () => ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: hsctp.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                  16, 10, index == 0 ? centerMargin : 16, 5),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height / 5.4,
+                    width: size.width / 2.5,
+                    child: CachedNetworkImage(
+                      imageUrl: hsctp[index].poster!,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover)),
+                      ),
+                      placeholder: (context, url) => const SpinKitFadingGrid(
+                        color: SolidColors.dividerColor,
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.image_not_supported_outlined,
+                        size: 32.0,
                       ),
                     ),
-                  ]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: SizedBox(
-                    width: size.width / 2.5,
-                    child: Text(
-                      listPodcast[index].title,
-                      style: textTheme.titleMedium,
-                      textAlign: TextAlign.center,
-                    ),
                   ),
-                )
-              ],
-            ),
-          );
-        },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: SizedBox(
+                      width: size.width / 2.5,
+                      child: Text(
+                        hsctp[index].title!,
+                        style: textTheme.titleMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

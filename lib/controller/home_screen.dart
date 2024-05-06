@@ -24,6 +24,9 @@ class HomeScreenController extends GetxController {
       response.data['top_visited'].forEach((element) {
         topVisited.add(ArticlesModel.fromJson(element));
       });
+      response.data['top_podcasts'].forEach((element) {
+        topPodcast.add(PodcastsModel.fromJson(element));
+      });
     } else {
       throw Exception('Failed to load data, Code: ${response.statusCode}');
     }
