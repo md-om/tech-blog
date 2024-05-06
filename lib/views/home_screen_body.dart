@@ -26,27 +26,37 @@ class HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            HomePageBanner(size: size, textTheme: textTheme),
-            const SizedBox(
-              height: 16,
-            ),
-            CategoryTags(centerMargin: centerMargin, textTheme: textTheme),
-            const SizedBox(
-              height: 32,
-            ),
-            HotestScrollTitle(centerMargin: centerMargin, textTheme: textTheme),
-            topArticle(),
-            HotestPodcastTitle(
-                centerMargin: centerMargin, textTheme: textTheme),
-            topPodcasts(),
-            const SizedBox(
-              height: 24,
-            ),
-          ],
+      child: Obx(
+        () => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: homeScreenController.isLoading == false.obs
+              ? Column(
+                  children: [
+                    homeBanner(),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    tags(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    HotestScrollTitle(
+                        centerMargin: centerMargin, textTheme: textTheme),
+                    topArticle(),
+                    HotestPodcastTitle(
+                        centerMargin: centerMargin, textTheme: textTheme),
+                    topPodcasts(),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                  ],
+                )
+              : const Center(
+                  child: SpinKitRing(
+                    color: SolidColors.primaryColor,
+                    size: 50.0,
+                  ),
+                ),
         ),
       ),
     );
@@ -195,6 +205,96 @@ class HomeScreenBody extends StatelessWidget {
       ),
     );
   }
+
+  Widget homeBanner() {
+    var hscp = homeScreenController.poster;
+    return Stack(
+      children: [
+        Container(
+          width: size.width / 1.19,
+          height: size.height / 4.20,
+          foregroundDecoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: GradientColor.bannerOverlayCover),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: hscp.value.image!,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  image:
+                      DecorationImage(image: imageProvider, fit: BoxFit.cover)),
+            ),
+            placeholder: (context, url) => const SpinKitFadingGrid(
+              color: SolidColors.dividerColor,
+            ),
+            errorWidget: (context, url, error) => const Icon(
+              Icons.image_not_supported_outlined,
+              size: 32.0,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 12,
+          left: 0,
+          right: 0,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    coverHeaderMap['writer'] + " - " + coverHeaderMap['date'],
+                    style: textTheme.displayMedium,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        coverHeaderMap['views'],
+                        style: textTheme.displayMedium,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      const Icon(
+                        Icons.remove_red_eye_sharp,
+                        size: 16,
+                        color: SolidColors.whiteColor,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                hscp.value.title!,
+                style: textTheme.displayLarge,
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget tags() {
+    return SizedBox(
+      height: 60,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: tagCategory.length,
+        itemBuilder: (context, index) {
+          return CatsTags(
+              centerMargin: centerMargin, textTheme: textTheme, index: index);
+        },
+      ),
+    );
+  }
 }
 
 class HotestPodcastTitle extends StatelessWidget {
@@ -259,109 +359,6 @@ class HotestScrollTitle extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class CategoryTags extends StatelessWidget {
-  const CategoryTags({
-    super.key,
-    required this.centerMargin,
-    required this.textTheme,
-  });
-
-  final double centerMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: tagCategory.length,
-        itemBuilder: (context, index) {
-          return CatsTags(
-              centerMargin: centerMargin, textTheme: textTheme, index: index);
-        },
-      ),
-    );
-  }
-}
-
-class HomePageBanner extends StatelessWidget {
-  const HomePageBanner({
-    super.key,
-    required this.size,
-    required this.textTheme,
-  });
-
-  final Size size;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: size.width / 1.19,
-          height: size.height / 4.20,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            image: DecorationImage(
-                image: AssetImage(coverHeaderMap['imagePath']),
-                fit: BoxFit.cover),
-          ),
-          foregroundDecoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: GradientColor.bannerOverlayCover),
-          ),
-        ),
-        Positioned(
-          bottom: 12,
-          left: 0,
-          right: 0,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    coverHeaderMap['writer'] + " - " + coverHeaderMap['date'],
-                    style: textTheme.displayMedium,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        coverHeaderMap['views'],
-                        style: textTheme.displayMedium,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      const Icon(
-                        Icons.remove_red_eye_sharp,
-                        size: 16,
-                        color: SolidColors.whiteColor,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                coverHeaderMap['title'],
-                style: textTheme.displayLarge,
-              )
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

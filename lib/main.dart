@@ -2,6 +2,7 @@ import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tech_blog/views/articles_list_screen.dart';
 import 'package:tech_blog/views/splash_screen.dart';
 
 void main() {
@@ -80,8 +81,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-      // home: const RegisterIntro(),
+      // home: const SplashScreen(),
+      home: const ArticleListScreen(),
     );
   }
 }

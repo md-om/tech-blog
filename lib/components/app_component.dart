@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
 import 'package:tech_blog/Models/fake_data.dart';
+import 'package:tech_blog/controller/home_screen.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -64,7 +67,7 @@ class CatsTags extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                tagCategory[index].title,
+                Get.find<HomeScreenController>().tagsList[index].title!,
                 style: textTheme.displayMedium,
               )
             ],
@@ -81,4 +84,40 @@ showUrlOnWeb(String url) async {
   if (!await launchUrl(uri)) {
     throw Exception("Could not launch $uri");
   }
+}
+
+PreferredSize techAppbar(String title) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(80),
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: Center(
+              child: Text(title),
+            ),
+          )
+        ],
+        leading: Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: SolidColors.primaryColor.withAlpha(100),
+            ),
+            child: const Icon(
+              CupertinoIcons.arrow_right,
+              color: SolidColors.whiteColor,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }
