@@ -87,6 +87,10 @@ class $AssetsImagesPublicGen {
   AssetGenImage get downArrow =>
       const AssetGenImage('assets/images/public/down_arrow.png');
 
+  /// File path: assets/images/public/error.jpg
+  AssetGenImage get error =>
+      const AssetGenImage('assets/images/public/error.jpg');
+
   /// File path: assets/images/public/logo.png
   AssetGenImage get logo =>
       const AssetGenImage('assets/images/public/logo.png');
@@ -96,7 +100,8 @@ class $AssetsImagesPublicGen {
       const SvgGenImage('assets/images/public/techbot.svg');
 
   /// List of all assets
-  List<dynamic> get values => [cover, defaultAvatar, downArrow, logo, techbot];
+  List<dynamic> get values =>
+      [cover, defaultAvatar, downArrow, error, logo, techbot];
 }
 
 class Assets {

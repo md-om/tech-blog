@@ -3,6 +3,7 @@ import 'package:tech_blog/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tech_blog/views/articles_list_screen.dart';
+import 'package:tech_blog/views/single_article_screen.dart';
 import 'package:tech_blog/views/splash_screen.dart';
 
 void main() {
@@ -78,11 +79,19 @@ class MyApp extends StatelessWidget {
               fontSize: 12,
               fontWeight: FontWeight.w400,
               color: SolidColors.hintColor),
+          displaySmall: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: SolidColors.dividerColor),
+          headlineSmall: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
+              color: SolidColors.titleColor),
         ),
       ),
       debugShowCheckedModeBanner: false,
       // home: const SplashScreen(),
-      home: const ArticleListScreen(),
+      home: SingleArticleScreen(),
     );
   }
 }

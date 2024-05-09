@@ -1,8 +1,13 @@
+import 'dart:math';
+import 'dart:ui';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/Constants/themecolors.dart';
-import 'package:tech_blog/Models/fake_data.dart';
+import 'package:tech_blog/Models/articles.dart';
 import 'package:tech_blog/controller/home_screen.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -93,10 +98,11 @@ PreferredSize techAppbar(String title) {
       padding: const EdgeInsets.all(8.0),
       child: AppBar(
         backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
         actions: [
           Padding(
-            padding: EdgeInsets.only(left: 16),
+            padding: const EdgeInsets.only(left: 16),
             child: Center(
               child: Text(title),
             ),
@@ -117,6 +123,85 @@ PreferredSize techAppbar(String title) {
             ),
           ),
         ),
+      ),
+    ),
+  );
+}
+
+Padding listScreen(
+    RxList<ArticlesModel> ascal, double screenWidth, double screenHeight) {
+  return Padding(
+    padding: const EdgeInsets.all(12.0),
+    child: Obx(
+      () => ListView.builder(
+        itemCount: ascal.length,
+        itemBuilder: (context, index) {
+          var textTheme = Theme.of(context).textTheme;
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: screenWidth / 4,
+                  height: screenHeight / 7,
+                  child: CachedNetworkImage(
+                    imageUrl: ascal[index].image!,
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                          image: DecorationImage(
+                              image: imageProvider, fit: BoxFit.cover),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: Text(
+                          ascal[index].title!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: textTheme.titleMedium,
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            ascal[index].author!,
+                            style: textTheme.displaySmall,
+                          ),
+                          Text(
+                            '${ascal[index].view} بازدید ',
+                            style: textTheme.displaySmall,
+                          ),
+                          Text(
+                            ascal[index].catName!,
+                            style: textTheme.headlineSmall,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+          // Text('Width is ${Get.width}');
+        },
       ),
     ),
   );

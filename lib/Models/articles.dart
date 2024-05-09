@@ -9,18 +9,20 @@ class ArticlesModel {
   String? author;
   String? view;
   String? status;
+  String? isFavorite;
   String? createdAt;
 
   ArticlesModel({
-    required this.id,
-    required this.title,
-    required this.image,
-    required this.catId,
-    required this.catName,
-    required this.author,
-    required this.view,
-    required this.status,
-    required this.createdAt,
+    this.id,
+    this.title,
+    this.image,
+    this.catId,
+    this.catName,
+    this.author,
+    this.view,
+    this.status,
+    this.isFavorite,
+    this.createdAt,
   });
   // We create a map from json and first parameter is key that all in json are String and second are dynamic
   ArticlesModel.fromJson(Map<String, dynamic> element) {
